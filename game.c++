@@ -35,19 +35,48 @@ void setup()
 
 // YOU
 
+void printLocation(){
+  Serial.println("x= "+ String(x) + ", y= "+ String(y));
+}
 
 void move(String direction){
-
+  if(direction == "right"){
+    x = x + 1;
+  }
+  else if(direction == "left"){
+    x = x - 1;
+  }
+  else if(direction == "up"){
+    y = y + 1;
+  }
+  else if(direction == "down"){
+    y = y - 1;
+  }
+  
+  printLocation();
 }
 
 void loop()
 {
   key = readSerial("> What Key Pressed? ");
-  Serial.println(key);
-  // here
-  if(key == "d")
-  {
-       //go right and print new coordinates 
-    move("r");
+  // Moves
+  if(key == "d" or key == "D"){
+    move("right");
+  }
+  else if(key == "s" or key == "S"){
+    move("down");
+  }
+  else if(key == "a" or key == "A"){
+    move("left");
+  }
+  else if(key == "w" or key == "W"){
+    move("up");
+  }
+  else if(key == "l" or key == "L"){
+    Serial.print("Current Location: ");
+    printLocation();
+  }
+  else{
+    Serial.println("> Move Not Allowed");
   }
 } 
