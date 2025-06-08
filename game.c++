@@ -4,7 +4,10 @@
 int x = 0;
 int y = 0;
 
-int prize;
+int prize_x = 3;
+int prize_y = -2;
+
+
 String key;
 String name;
 
@@ -78,5 +81,10 @@ void loop()
   }
   else{
     Serial.println("> Move Not Allowed");
+  }
+  
+  if (x == prize_x && y == prize_y)
+  {
+   	Serial.println(">>> You Got a prize"); 
   }
 } 
