@@ -1,14 +1,37 @@
 // End Game
 
+//Class
+
+class Coordinate
+{
+  public:
+  
+  int x;
+  int y;
+  
+  Coordinate(int x, int y)
+  {
+    this->x = x;
+    this->y = y;
+  }
+  
+  void printLocation(String pretext = "")
+  {
+    Serial.print(pretext);
+  	Serial.println("x= "+ String(this->x) + ", y= "+ String(this->y));
+  }
+};
+
 //Variaables
-int x = 0;
-int y = 0;
 
-int prize1_x = random(-3, 3);
-int prize1_y = random(-3, 3);
+//My loc = My Location 
+Coordinate myLoc(0,0);
 
-int prize2_x = random(-3,3);
-int prize2_y = random(-3,3);
+//.                x                y
+Coordinate prize1(random(-3, 3), random(-3, 3));
+
+//.                x                y
+Coordinate prize2(random(-3, 3), random(-3, 3));
 
 
 String key;
@@ -37,33 +60,34 @@ void setup()
   name = readSerial("Enter your name:");
   Serial.println("Welcome to the Maze "+ name);
   Serial.println("***\n");
+  
+  // For cheat to get Location 
+  prize1.printLocation("Prize 1 Location: ");
+  prize2.printLocation("Prize 2 Location: ");
 }
 
 // YOU
 
-void printLocation(){
-  Serial.println("x= "+ String(x) + ", y= "+ String(y));
-}
-
 void move(String direction){
   if(direction == "right"){
-    x = x + 1;
+    myLoc.x = myLoc.x + 1;
   }
   else if(direction == "left"){
-    x = x - 1;
+    myLoc.x = myLoc.x - 1;
   }
   else if(direction == "up"){
-    y = y + 1;
+    myLoc.y = myLoc.y + 1;
   }
   else if(direction == "down"){
-    y = y - 1;
+    myLoc.y = myLoc.y - 1;
   }
   
-  printLocation();
+  myLoc.printLocation();
 }
 
 void loop()
 {
+  
   key = readSerial("> What Key Pressed? ");
   // Moves
   if(key == "d" or key == "D"){
@@ -79,18 +103,17 @@ void loop()
     move("up");
   }
   else if(key == "l" or key == "L"){
-    Serial.print("Current Location: ");
-    printLocation();
+    myLoc.printLocation("My current location: ");
   }
   else{
     Serial.println("> Move Not Allowed");
   }
   
-  if (x == prize1_x && y == prize1_y)
+  if (myLoc.x == prize1.x && myLoc.y == prize1.y)
   {
    	Serial.println(">>> You Got prize1"); 
   }
-  if(x == prize2_x && y == prize2_y)
+  if(myLoc.x == prize2.x && myLoc.y == prize2.y)
   {
    	Serial.println(">>> You Got prize2"); 
   }
