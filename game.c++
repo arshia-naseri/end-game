@@ -4,8 +4,11 @@
 int x = 0;
 int y = 0;
 
-int prize_x = 3;
-int prize_y = -2;
+int prize1_x = random(-3, 3);
+int prize1_y = random(-3, 3);
+
+int prize2_x = random(-3,3);
+int prize2_y = random(-3,3);
 
 
 String key;
@@ -83,8 +86,12 @@ void loop()
     Serial.println("> Move Not Allowed");
   }
   
-  if (x == prize_x && y == prize_y)
+  if (x == prize1_x && y == prize1_y)
   {
-   	Serial.println(">>> You Got a prize"); 
+   	Serial.println(">>> You Got prize1"); 
+  }
+  if(x == prize2_x && y == prize2_y)
+  {
+   	Serial.println(">>> You Got prize2"); 
   }
 } 
